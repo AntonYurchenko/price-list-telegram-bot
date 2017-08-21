@@ -1,6 +1,5 @@
 package ruby.bots
 
-import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.{Message, Update}
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.api.methods._
@@ -33,10 +32,7 @@ class PriceBot extends TelegramLongPollingBot {
     * @param update Update it is [[https://core.telegram.org/bots/api#update update]] entity.
     */
   override def onUpdateReceived(update: Update): Unit = {
-
-    if (update.hasMessage && update.getMessage.isCommand)
       cmdHandler.handle(update.getMessage).foreach(execute[Message, BotApiMethod[Message]])
-
   }
 
 }
