@@ -6,9 +6,18 @@ import com.typesafe.config.{Config, ConfigFactory}
 
 import scala.collection.JavaConverters._
 
+/**
+  * The object gives access to parameters from application.conf file
+  *
+  * @author Anton Yurchenko
+  */
 object ConfigFile {
 
   val conf: Config = ConfigFactory.load()
+
+  // Telegram
+  val botUserName: String = conf.getString("telegram.bot.user.name")
+  val botToken: String = conf.getString("telegram.bot.token")
 
   // Message block
   val startHeader: String = conf.getString("messages.start.header")
