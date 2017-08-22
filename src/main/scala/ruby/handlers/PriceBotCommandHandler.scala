@@ -3,8 +3,7 @@ package ruby.handlers
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import ruby.sources.ConfigFile._
-
-import scala.io.Source
+import ruby.sources.PriceSource
 
 class PriceBotCommandHandler extends CommandHandler {
 
@@ -23,11 +22,11 @@ class PriceBotCommandHandler extends CommandHandler {
       new SendMessage(msgWithCmd.getChatId, text).enableHtml(true) :: Nil
 
     case "/price" =>
-      val is = this.getClass.getResourceAsStream("/price/21082017.txt")
-      val price = Source.fromInputStream(is).getLines().toSeq
-
-      if (price.length <= 100) new SendMessage(msgWithCmd.getChatId, price.mkString("\n")) :: Nil
-      else price.grouped(100).map(_.mkString("\n")).map(new SendMessage(msgWithCmd.getChatId, _)).toSeq
+      val price = PriceSource.readActual(priceDir)
+      if (price.isEmpty) new SendMessage(msgWithCmd.getChatId, priceNotAvailable) :: Nil
+      else
+        price.map(_.mkString("\n"))
+          .map(text => new SendMessage(msgWithCmd.getChatId, text))
 
     case _ =>
       new SendMessage(msgWithCmd.getChatId, badCommand) :: Nil
