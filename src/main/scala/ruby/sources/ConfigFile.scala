@@ -17,10 +17,16 @@ object ConfigFile {
   val contacts: List[String] = conf.getStringList("messages.contacts.list").asScala.toList
   val badCommand: String = conf.getString("messages.bad.command")
   val priceNotAvailable: String = conf.getString("messages.price.not.available")
+  val adminWelcome: String = conf.getString("messages.admin.welcome")
+  val successStatus: String = conf.getString("messages.success.status")
 
   //Commands
   val commands: List[String] = conf.getStringList("commands.list").asScala.toList
 
   //Price save
   val priceDir: File = new File(conf.getString("price.save.dir"))
+
+  // Admin password
+  val adminPassword: String = conf.getString("admin.password")
+  val adminPeriod: Long = conf.getInt("admin.auto.disable") * 60L * 1000L
 }
