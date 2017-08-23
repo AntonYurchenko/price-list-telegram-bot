@@ -3,6 +3,8 @@ package ruby.sources
 import java.io.{File, FileWriter}
 import java.nio.file.{Files, StandardCopyOption}
 
+import com.typesafe.scalalogging.LazyLogging
+
 import scala.io.Source
 
 /**
@@ -10,7 +12,7 @@ import scala.io.Source
   *
   * @author Anton Yurchenko
   */
-object PriceSource {
+object PriceSource extends LazyLogging {
 
   /**
     * The method select price list file with max time stamp from work directory and read it.
@@ -22,8 +24,10 @@ object PriceSource {
     */
   def readActual(dir: File, partition: Int = 100): Seq[Seq[String]] = {
     val fileList = dir.listFiles().filter(_.isFile)
-    if (fileList.isEmpty) Nil
-    else {
+    if (fileList.isEmpty) {
+      logger.error("Actual price list is not found")
+      Nil
+    } else {
       val lastTsFile = fileList.max
       val price = Source.fromFile(lastTsFile, "UTF-8").getLines().toSeq
       if (price.length <= 100) price :: Nil
@@ -46,7 +50,9 @@ object PriceSource {
     writer.close()
     true
   } catch {
-    case _: Exception => false
+    case ex: Exception =>
+      logger.error(s"Writing of ${file.getPath} throw exception: ", ex)
+      false
   }
 
   /**
@@ -60,7 +66,9 @@ object PriceSource {
     Files.move(file1.toPath, file2.toPath, StandardCopyOption.ATOMIC_MOVE)
     true
   } catch {
-    case _: Exception => false
+    case ex: Exception =>
+      logger.error(s"Mowing of ${file1.getPath} to ${file2.getPath} throw exception: ", ex)
+      false
   }
 
 }
