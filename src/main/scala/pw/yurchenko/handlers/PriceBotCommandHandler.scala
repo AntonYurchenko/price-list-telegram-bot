@@ -1,13 +1,13 @@
-package ruby.handlers
+package pw.yurchenko.handlers
 
 import java.io.File
 
 import com.typesafe.scalalogging.LazyLogging
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
-import ruby.entiny.AdminStatus
-import ruby.sources.ConfigFile._
-import ruby.sources.PriceSource
+import pw.yurchenko.entiny.AdminStatus
+import pw.yurchenko.sources.ConfigFile._
+import pw.yurchenko.sources.PriceSource
 
 /**
   * The class is handler of commands for PriceBot

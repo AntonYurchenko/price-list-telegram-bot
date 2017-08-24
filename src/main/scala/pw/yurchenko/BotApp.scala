@@ -1,10 +1,10 @@
-package ruby
+package pw.yurchenko
 
 import com.typesafe.scalalogging.LazyLogging
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException
 import org.telegram.telegrambots.{ApiContextInitializer, TelegramBotsApi}
-import ruby.bots.PriceBot
-import ruby.sources.ConfigFile._
+import pw.yurchenko.bots.PriceBot
+import pw.yurchenko.sources.ConfigFile._
 
 /**
   * The object is entry point of application

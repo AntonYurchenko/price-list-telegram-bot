@@ -1,10 +1,10 @@
-package ruby.bots
+package pw.yurchenko.bots
 
 import org.telegram.telegrambots.api.objects.{Message, Update}
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.api.methods._
-import ruby.handlers.PriceBotCommandHandler
-import ruby.sources.ConfigFile._
+import pw.yurchenko.handlers.PriceBotCommandHandler
+import pw.yurchenko.sources.ConfigFile._
 
 /**
   * The class is implement of bot for sending price list.

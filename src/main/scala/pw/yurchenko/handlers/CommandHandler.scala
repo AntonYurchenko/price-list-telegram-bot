@@ -1,4 +1,4 @@
-package ruby.handlers
+package pw.yurchenko.handlers
 
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
