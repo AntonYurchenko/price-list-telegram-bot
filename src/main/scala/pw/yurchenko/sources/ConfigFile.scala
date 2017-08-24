@@ -1,4 +1,4 @@
-package ruby.sources
+package pw.yurchenko.sources
 
 import java.io.File
 

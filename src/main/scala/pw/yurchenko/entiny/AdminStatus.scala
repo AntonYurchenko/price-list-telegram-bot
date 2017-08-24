@@ -1,4 +1,4 @@
-package ruby.entiny
+package pw.yurchenko.entiny
 
 /**
   * The case class uses for changing user status in runtime
