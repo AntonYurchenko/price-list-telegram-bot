@@ -1,6 +1,6 @@
 package pw.yurchenko.sources
 
-import java.io.{File, FileWriter}
+import java.io._
 import java.nio.file.{Files, StandardCopyOption}
 
 import com.typesafe.scalalogging.LazyLogging
@@ -44,8 +44,13 @@ object PriceSource extends LazyLogging {
     * @return Boolean
     */
   def write(file: File, content: String, append: Boolean = true): Boolean = try {
-    val writer = new FileWriter(file, append)
-    writer.write(content)
+    val writer = new BufferedWriter(
+      new OutputStreamWriter(
+        new FileOutputStream(file, true), "UTF-8")
+    )
+    //val writer = new FileWriter(file, append)
+    writer.append(content)
+    writer.newLine()
     writer.flush()
     writer.close()
     true

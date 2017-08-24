@@ -1,4 +1,5 @@
 .idea
 target
-src/main/resources/prices
+src/main/resources/prices/*
+!src/main/resources/prices/0
 worksheets

@@ -34,6 +34,7 @@ object ConfigFile {
 
   //Price save
   val priceDir: File = new File(conf.getString("price.save.dir"))
+  val tmpDir: File = new File(conf.getString("tmp.dir"))
 
   // Admin password
   val adminPassword: String = conf.getString("admin.password")
