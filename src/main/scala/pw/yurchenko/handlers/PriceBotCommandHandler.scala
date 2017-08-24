@@ -76,7 +76,9 @@ class PriceBotCommandHandler extends CommandHandler with LazyLogging {
 
       // Bot moves saved file with price list to work directory
       case "/save" if admin.isAdmin =>
-        if (PriceSource.move(new File(s"$priceDir/tmp/${admin.ts}"), new File(s"$priceDir/${admin.ts}"))) {
+        val adminTs = admin.ts
+        admin = AdminStatus()
+        if (PriceSource.move(new File(s"$tmpDir/$adminTs"), new File(s"$priceDir/$adminTs"))) {
           logger.info(s"Price list has been moved successful")
           new SendMessage(chatId, successStatus) :: Nil
         }
@@ -98,7 +100,7 @@ class PriceBotCommandHandler extends CommandHandler with LazyLogging {
       // Bot saves taken messages with price list to temp directory as file.
       // Filename is timestamp when admin mode has been enabled
       case savePrice: String if admin.isAdmin =>
-        val path = s"$priceDir/tmp/${admin.ts}"
+        val path = s"$tmpDir/${admin.ts}"
         if (PriceSource.write(new File(path), savePrice)) {
           logger.info(s"User with userId:$userName has been wrote message in price list file $path (chatId:$chatId)")
           new SendMessage(chatId, successStatus) :: Nil
