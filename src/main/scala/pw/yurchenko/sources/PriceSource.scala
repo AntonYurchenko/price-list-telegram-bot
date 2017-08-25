@@ -23,15 +23,20 @@ object PriceSource extends LazyLogging {
     * @return Seq[ Seq[String] ]
     */
   def readActual(dir: File, partition: Int = 100): Seq[Seq[String]] = {
-    val fileList = dir.listFiles().filter(_.isFile)
-    if (fileList.isEmpty) {
-      logger.error("Actual price list is not found")
+    if (!dir.exists() || !dir.isDirectory) {
+      logger.error(s"$dir is not exists or is not directory")
       Nil
     } else {
-      val lastTsFile = fileList.max
-      val price = Source.fromFile(lastTsFile, "UTF-8").getLines().toSeq
-      if (price.length <= 100) price :: Nil
-      else price.grouped(100).toSeq
+      val fileList = dir.listFiles().filter(_.isFile)
+      if (fileList.isEmpty) {
+        logger.error("Actual price list is not found")
+        Nil
+      } else {
+        val lastTsFile = fileList.max
+        val price = Source.fromFile(lastTsFile, "UTF-8").getLines().toSeq
+        if (price.length <= 100) price :: Nil
+        else price.grouped(100).toSeq
+      }
     }
   }
 
