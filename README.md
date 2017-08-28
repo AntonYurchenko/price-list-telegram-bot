@@ -1,4 +1,4 @@
-#Bot for sending price lists through telegram messenger
+# Bot for sending price lists through telegram messenger
 ## Build
 For building the bot your need to perform next simple steps:
 1. Install Java 8
