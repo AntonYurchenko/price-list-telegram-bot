@@ -22,6 +22,7 @@ packageName in Universal := packageName.value
 mappings in Universal in packageBin += file("src/main/resources/application.conf") -> "conf/application.conf"
 mappings in Universal in packageBin += file("src/main/resources/logging.properties") -> "conf/logging.properties"
 mappings in Universal in packageBin += file("src/main/resources/prices/0") -> "prices/0"
+mappings in Universal in packageBin += file("src/main/resources/price-list-telegram-bot.service") -> "bin/price-list-telegram-bot.service"
 
 bashScriptExtraDefines ++= Seq(
   """addJava "-Dconfig.file=${app_home}/../conf/application.conf" """,
